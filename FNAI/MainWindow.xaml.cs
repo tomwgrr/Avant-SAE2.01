@@ -35,6 +35,7 @@ namespace FNAI
         {
             switch(sender)
             {
+                case Button button when button == startButton:startButton.Content = ">Play"; break;
                 case Button button when button == loadButton : loadButton.Content = ">Load"; break;
                 case Button button when button == optionsButton : optionsButton.Content = ">Options"; break;
                 case Button button when button == exitButton : exitButton.Content = ">Exit"; break;

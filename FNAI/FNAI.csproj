@@ -9,6 +9,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Entity\**" />
+	  <EmbeddedResource Remove="Entity\**" />
+	  <None Remove="Entity\**" />
+	  <Page Remove="Entity\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Remove="Assets\FiveFontsatFreddy%27s-Regular.ttf" />
 		<None Remove="Assets\freddy.jpeg" />
 		<None Remove="Assets\menu.png" />
@@ -28,7 +35,6 @@
 
 	<ItemGroup>
 		<Folder Include="Music\" />
-		<Folder Include="Entity\" />
 	</ItemGroup>
 
 	<ItemGroup>
