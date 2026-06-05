@@ -27,13 +27,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Music\" />
 		<Folder Include="Entity\" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<None Update="Music\LobbyMusic.mp3">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Music\PhoneCall.m4a">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Music\phonering.mp3">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
 

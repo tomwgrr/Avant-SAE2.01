@@ -31,6 +31,13 @@ namespace FNAI
             options.Show();
         }
 
+        private void OpenPlayGame(object sender, RoutedEventArgs e)
+        {
+            ArreterMusiqueLobby();
+            PlayGame playGame = new PlayGame();
+            playGame.Show();
+        }
+
         private void Selected(object sender, MouseEventArgs e)
         {
             switch(sender)
@@ -76,10 +83,7 @@ namespace FNAI
             }
         }
 
-        private void StartGame(object sender, RoutedEventArgs e)
-        {
-            ArreterMusiqueLobby();
-        }
+
 
     }
 }
