@@ -21,10 +21,12 @@ namespace FNAI
     {
         private MediaPlayer battalSpeach = new MediaPlayer();
         private MediaPlayer phoneRing = new MediaPlayer();
+        private MediaPlayer backgroundMusic = new MediaPlayer();
         public PlayGame()
         {
             InitializeComponent();
             InitialiserBattalSpeach();
+            PlayBackGroundMusic();
         }
 
         private void mutecall(object sender, RoutedEventArgs e)
@@ -37,13 +39,23 @@ namespace FNAI
             battalSpeach.Open(new Uri(@"Music\PhoneCall.m4a", UriKind.RelativeOrAbsolute));
             phoneRing.Open(new Uri(@"Music\phonering.mp3", UriKind.RelativeOrAbsolute));
             phoneRing.Play();
-            
+
             phoneRing.MediaEnded += (s, e) =>
             {
                 battalSpeach.Play();
             };
-            
-        }
 
+        }
+        private void PlayBackGroundMusic()
+        {
+            backgroundMusic.Open(new Uri(@"Music\AmbianceMusic.mp3", UriKind.RelativeOrAbsolute));
+            backgroundMusic.MediaEnded += RelancerLaMusique;
+            backgroundMusic.Play();
+        }
+        private void RelancerLaMusique(object sender, EventArgs e)
+        {
+            backgroundMusic.Position = TimeSpan.Zero;
+            backgroundMusic.Play();
+        }
     }
 }
