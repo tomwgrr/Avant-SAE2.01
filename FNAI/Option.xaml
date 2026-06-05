@@ -65,7 +65,7 @@
                                             <Setter Property="Foreground" Value="#FFFFFF"/>
                                             <Setter Property="Effect">
                                                 <Setter.Value>
-                                                    <DropShadowEffect Color="Red" BlurRadius="20" ShadowDepth="0" Opacity="0.9"/>
+                                                    <DropShadowEffect Color="White" BlurRadius="20" ShadowDepth="0" Opacity="0.9"/>
                                                 </Setter.Value>
                                             </Setter>
                                         </Trigger>
@@ -95,7 +95,7 @@
                                             <Setter Property="Foreground" Value="#FFFFFF"/>
                                             <Setter Property="Effect">
                                                 <Setter.Value>
-                                                    <DropShadowEffect Color="Red" BlurRadius="20" ShadowDepth="0" Opacity="0.9"/>
+                                                    <DropShadowEffect Color="White" BlurRadius="20" ShadowDepth="0" Opacity="0.9"/>
                                                 </Setter.Value>
                                             </Setter>
                                         </Trigger>

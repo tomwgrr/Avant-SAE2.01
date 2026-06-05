@@ -110,7 +110,7 @@
                 </Grid.Resources>
 
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="80,100,0,60">
-                    <Button x:Name="startButton" Content="Play" Style="{StaticResource MenuButtonStyle}" MouseEnter="Selected" MouseLeave="Unselect"/>
+                    <Button x:Name="startButton" Content="Play" Style="{StaticResource MenuButtonStyle}" MouseEnter="Selected" MouseLeave="Unselect" Click="StartGame"/>
                     <Button x:Name="loadButton" Content="Load" Style="{StaticResource MenuButtonStyle}" MouseEnter="Selected" MouseLeave="Unselect"/>
                     <Button x:Name="optionsButton" Content="Options" Style="{StaticResource MenuButtonStyle}" Click="OpenSettings" MouseEnter="Selected" MouseLeave="Unselect"/>
                     <Button x:Name="exitButton" Content="Exit" Style="{StaticResource MenuButtonStyle}" Click="End" MouseEnter="Selected" MouseLeave="Unselect"/>

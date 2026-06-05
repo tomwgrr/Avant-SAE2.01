@@ -75,5 +75,11 @@ namespace FNAI
                 case Button button when button == exitButton : exitButton.Content = "Exit"; break;
             }
         }
+
+        private void StartGame(object sender, RoutedEventArgs e)
+        {
+            ArreterMusiqueLobby();
+        }
+
     }
 }
