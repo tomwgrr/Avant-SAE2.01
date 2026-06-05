@@ -14,6 +14,10 @@
 
             <!-- Fond -->
             <Grid Background="Black">
+
+
+
+
                 <!-- Vignette radiale -->
                 <Rectangle>
                     <Rectangle.Fill>
@@ -24,9 +28,9 @@
                         </RadialGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
+
             </Grid>
 
-            <!-- Titre Settings -->
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="48,100,0,0">
                 <Label x:Name="title1" Content="Settings :"
                        Background="Transparent" Foreground="White"
@@ -45,14 +49,15 @@
                         <Setter Property="Padding" Value="20,10"/>
                         <Setter Property="Margin" Value="0,0,0,0"/>
                         <Setter Property="HorizontalAlignment" Value="Left"/>
+
                         <Setter Property="FontFamily" Value="pack://application:,,,/Assets/#Five Fonts at Freddy's"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="Transparent"
-                                            BorderThickness="0"
-                                            Padding="{TemplateBinding Padding}">
+                                    <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="Transparent" 
+                                BorderThickness="0" 
+                                Padding="{TemplateBinding Padding}">
                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
                                     <ControlTemplate.Triggers>
