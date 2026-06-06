@@ -25,25 +25,58 @@
     </Window.Resources>
 
     <Grid>
+        <!-- Scène principale avec les éléments de jeu et Marius -->
         <Grid x:Name="SceneJeu" Visibility="Visible">
             <Image Source="/Assets/Scene.png" Stretch="UniformToFill"/>
-            <Button x:Name="MuteCallButton" Content="Mute Call"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Margin="724,19,0,0"
-                    Click="mutecall"/>
+
+            <Viewbox Stretch="Uniform">
+                <Canvas Width="1280" Height="720" ClipToBounds="False">
+                    <Button x:Name="MuteCallButton" Content="Mute Call"
+                            Canvas.Left="724" Canvas.Top="19"
+                            Click="mutecall"/>
+
+                    <Image x:Name="FarAwayStandingMarius" 
+                           Canvas.Left="610" Canvas.Top="153"
+                           Height="227" Width="91"
+                           Stretch="Uniform"
+                           Source="/Assets/marius/Stand.png" Visibility="Collapsed" Opacity="0.1"/>
+
+                    <Image x:Name="StandingMarius" 
+                           Canvas.Left="564" Canvas.Top="181"
+                           Height="371" Width="184"
+                           Stretch="Uniform"
+                           Source="/Assets/marius/Stand.png" Visibility="Collapsed" Opacity="0.25"/>
+
+                    <Image x:Name="MariusOnDesk" 
+                           Canvas.Left="490" Canvas.Top="267"
+                           Height="344" Width="472"
+                           Stretch="Uniform"
+                           Source="/Assets/marius/Desk.png" Visibility="Collapsed"/>
+
+                    <Image x:Name="MariusFlashOnDesk" 
+                           Canvas.Left="436" Canvas.Top="267"
+                           Height="344" Width="513"
+                           Stretch="Fill"
+                           Source="/Assets/marius/FlashedonDesk.png" Visibility="Collapsed"/>
+                </Canvas>
+            </Viewbox>
+
             <Canvas x:Name="CanvasPopups"/>
+            <Rectangle x:Name="FlashOverlay" Fill="Black" Opacity="0" IsHitTestVisible="False"/>
         </Grid>
 
+        <!-- Scène sous la table -->
         <Grid x:Name="SceneCachette" Visibility="Collapsed" Background="Black">
             <Image Source="/Assets/UnderTable.jpg" Stretch="UniformToFill"/>
         </Grid>
+
+        <!-- Transition vidéo -->
         <MediaElement x:Name="VideoTransition" 
-                  Source="Assets/SlideUnderTable.mp4" 
-                  LoadedBehavior="Manual" 
-                  UnloadedBehavior="Stop"
-                  Stretch="UniformToFill" 
-                  Visibility="Collapsed"
-                  MediaEnded="VideoTransition_MediaEnded"/>
+                      Source="Assets/SlideUnderTable.mp4" 
+                      LoadedBehavior="Manual" 
+                      UnloadedBehavior="Stop"
+                      Stretch="UniformToFill" 
+                      Visibility="Collapsed"
+                      MediaEnded="VideoTransition_MediaEnded"/>
     </Grid>
 </Window>

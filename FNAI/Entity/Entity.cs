@@ -12,6 +12,7 @@ namespace FNAI.Entity
         private int _AISCore;
         private bool isAwake;
         #endregion
+        protected int AIscore => _AISCore; 
 
         public Entity(int AIscore)
         {
