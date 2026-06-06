@@ -42,7 +42,7 @@
                            Source="/Assets/marius/Stand.png" Visibility="Collapsed" Opacity="0.1"/>
 
                     <Image x:Name="StandingMarius" 
-                           Canvas.Left="564" Canvas.Top="181"
+                           Canvas.Left="564" Canvas.Top="100"
                            Height="371" Width="184"
                            Stretch="Uniform"
                            Source="/Assets/marius/Stand.png" Visibility="Collapsed" Opacity="0.25"/>

@@ -18,6 +18,8 @@ namespace FNAI
         private Random random = new Random();
         private DispatcherTimer timerApparition;
         private bool isTransitioning = false;
+        private Marius marius; // champ de classe
+
 
         public PlayGame()
         {
@@ -46,7 +48,7 @@ namespace FNAI
         private void InitialiserEntity()
         {
             // Initialisation de Marius
-            Marius marius = new Marius(Option.MariusScore, this);
+            marius = new Marius(Option.MariusScore, this); // pas de "Marius" devant
         }
 
         private void InitialiserBattalSpeach()
@@ -154,6 +156,18 @@ namespace FNAI
             backgroundMusic?.Stop();
             battalSpeach?.Stop();
             phoneRing?.Stop();
+        }
+        public void EndGame()
+        {
+            backgroundMusic?.Stop();
+            battalSpeach?.Stop();
+            phoneRing?.Stop();
+
+            marius?.Stop();
+
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
         }
     }
 }
