@@ -1,6 +1,4 @@
-﻿Voici la version fusionnée et nettoyée de ton code C#, intégrant à la fois la gestion des entités (`Marius`), les transitions, les événements clavier et la gestion des ressources.
-
-```csharp
+﻿
 using FNAI.Entity;
 using System;
 using System.Windows;
@@ -132,12 +130,14 @@ namespace FNAI
                 }
             }
 
-            // Retour au menu avec Echap
             if (e.Key == Key.Escape)
             {
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 this.Close();
+                backgroundMusic?.Stop();
+                battalSpeach?.Stop();
+                phoneRing?.Stop();
             }
         }
 
@@ -151,12 +151,9 @@ namespace FNAI
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            // Nettoyage des ressources
             backgroundMusic?.Stop();
             battalSpeach?.Stop();
             phoneRing?.Stop();
         }
     }
 }
-
-```
