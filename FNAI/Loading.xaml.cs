@@ -71,11 +71,11 @@ namespace FNAI
         private void ShowLogo()
         {
             // Fade in logo
-            var fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(5));
+            var fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(2));
             fadeIn.Completed += (_, _) =>
             {
                 // Attend 2s puis fade out
-                var wait = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1.0) };
+                var wait = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.5) };
                 wait.Tick += (_, _) => { wait.Stop(); FadeOut(); };
                 wait.Start();
             };
@@ -86,7 +86,7 @@ namespace FNAI
         {
             TriggerFlash();
 
-            var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(1.0));
+            var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.5));
             fadeOut.BeginTime = TimeSpan.FromSeconds(0.2);
             fadeOut.Completed += (_, _) =>
             {
