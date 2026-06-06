@@ -8,7 +8,7 @@
         Title="FNAI"
         WindowStyle="None"
         WindowState="Maximized">
-
+       
     <Viewbox Stretch="Uniform">
         <Grid Width="1920" Height="1080">
 
@@ -116,7 +116,6 @@
                     <Button x:Name="exitButton" Content="Exit" Style="{StaticResource MenuButtonStyle}" Click="End" MouseEnter="Selected" MouseLeave="Unselect"/>
                 </StackPanel>
             </Grid>
-
         </Grid>
     </Viewbox>
 

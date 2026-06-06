@@ -1,5 +1,6 @@
 using System;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace FNAI
@@ -9,6 +10,18 @@ namespace FNAI
         public Option()
         {
             InitializeComponent();
+            try
+            {
+                var streamInfo = Application.GetResourceStream(new Uri("pack://application:,,,/Assets/Giant.cur"));
+                if (streamInfo != null)
+                {
+                    this.Cursor = new Cursor(streamInfo.Stream);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors du chargement du curseur : " + ex.Message);
+            }
         }
         private BitmapImage LoadImage(string name)
         {
