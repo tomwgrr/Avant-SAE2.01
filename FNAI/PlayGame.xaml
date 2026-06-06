@@ -8,6 +8,7 @@
         Title="PlayGame" Height="450" Width="800">
     <Grid>
         <Button x:Name="MuteCallButton" Content="Mute Call" HorizontalAlignment="Left" Margin="724,19,0,0" VerticalAlignment="Top" Click="mutecall"/>
+        <Canvas x:Name="CanvasPopups"/>
 
     </Grid>
 </Window>

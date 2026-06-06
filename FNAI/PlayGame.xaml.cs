@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace FNAI
 {
@@ -22,11 +23,17 @@ namespace FNAI
         private MediaPlayer battalSpeach = new MediaPlayer();
         private MediaPlayer phoneRing = new MediaPlayer();
         private MediaPlayer backgroundMusic = new MediaPlayer();
+        private Random random = new Random();
+        private DispatcherTimer timerApparition;
         public PlayGame()
         {
             InitializeComponent();
             InitialiserBattalSpeach();
             PlayBackGroundMusic();
+            timerApparition = new DispatcherTimer();
+            timerApparition.Interval = TimeSpan.FromSeconds(1);
+            timerApparition.Tick += TimerApparition_Tick;
+            timerApparition.Start();
             try
             {
                 var streamInfo = Application.GetResourceStream(new Uri("pack://application:,,,/Assets/Giant.cur"));
@@ -68,6 +75,34 @@ namespace FNAI
         {
             backgroundMusic.Position = TimeSpan.Zero;
             backgroundMusic.Play();
+        }
+
+        private void CreerNouvellePopup(int pointsDeVie)
+        {
+            PopupInvasion popup = new PopupInvasion(pointsDeVie);
+
+            popup.DemandeFermeture += (s, e) => { CanvasPopups.Children.Remove(popup); };
+            popup.DemandeDuplication += (s, e) => { CreerNouvellePopup(2); };
+            double xMax = CanvasPopups.ActualWidth > 0 ? CanvasPopups.ActualWidth - 200 : 400;
+            double yMax = CanvasPopups.ActualHeight > 0 ? CanvasPopups.ActualHeight - 120 : 300;
+
+            double x = random.Next(0, (int)xMax);
+            double y = random.Next(0, (int)yMax);
+
+            Canvas.SetLeft(popup, x);
+            Canvas.SetTop(popup, y);
+
+            CanvasPopups.Children.Add(popup);
+        }
+
+        private void TimerApparition_Tick(object sender, EventArgs e)
+        {
+            if (random.Next(1, 31) == 1)
+            {
+              
+                int pvDeBase = random.Next(1, 3);
+                CreerNouvellePopup(pvDeBase);
+            }
         }
     }
 }
