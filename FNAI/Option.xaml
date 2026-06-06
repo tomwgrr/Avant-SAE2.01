@@ -128,7 +128,7 @@
                                 BorderBrush="White" BorderThickness="3"
                                 Background="Transparent">
                             <Image x:Name="block1Image"
-                                   Source="/Assets/freddy.jpeg"
+                                   Source="/Assets/Marius.png"
                                    Stretch="UniformToFill"/>
                         </Border>
                         <!-- Flèches + valeur -->
@@ -145,7 +145,7 @@
                                 BorderBrush="White" BorderThickness="3"
                                 Background="Transparent">
                             <Image x:Name="block2Image"
-                                   Source="pack://application:,,,/Assets/img2_0.png"
+                                   Source="/Assets/Battal.png"
                                    Stretch="UniformToFill"/>
                         </Border>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
@@ -161,7 +161,7 @@
                                 BorderBrush="White" BorderThickness="3"
                                 Background="Transparent">
                             <Image x:Name="block3Image"
-                                   Source="pack://application:,,,/Assets/img3_0.png"
+                                   Source="/Assets/Tom.png"
                                    Stretch="UniformToFill"/>
                         </Border>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">

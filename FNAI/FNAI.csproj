@@ -19,7 +19,9 @@
 		<None Remove="Assets\FiveFontsatFreddy%27s-Regular.ttf" />
 		<None Remove="Assets\freddy.jpeg" />
 		<None Remove="Assets\Giant.cur" />
+		<None Remove="Assets\Marius.png" />
 		<None Remove="Assets\menu.png" />
+		<None Remove="Assets\Tom.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -37,8 +39,14 @@
 		<Resource Include="Assets\Giant.cur">
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
+		<Resource Include="Assets\Marius.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
 		<Resource Include="Assets\menu.png">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\Tom.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
 	</ItemGroup>
 
