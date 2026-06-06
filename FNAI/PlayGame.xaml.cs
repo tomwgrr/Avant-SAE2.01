@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -25,6 +26,7 @@ namespace FNAI
         private MediaPlayer backgroundMusic = new MediaPlayer();
         private Random random = new Random();
         private DispatcherTimer timerApparition;
+        private bool isTransitioning = false;
         public PlayGame()
         {
             InitializeComponent();
@@ -104,5 +106,51 @@ namespace FNAI
                 CreerNouvellePopup(pvDeBase);
             }
         }
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space && !isTransitioning)
+            {
+                if (SceneJeu.Visibility == Visibility.Visible)
+                {
+                    isTransitioning = true;
+                    VideoTransition.Visibility = Visibility.Visible;
+                    VideoTransition.Position = TimeSpan.Zero; 
+                    VideoTransition.Play();
+                }
+                else
+                {
+                    SceneCachette.Visibility = Visibility.Collapsed;
+                    SceneJeu.Visibility = Visibility.Visible;
+                }
+            }
+            if (e.Key == Key.Escape)
+            {
+
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                battalSpeach.Stop();
+                phoneRing.Stop();
+                this.Close();
+            }
+        }
+
+       
+        private void VideoTransition_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            isTransitioning = false;
+            VideoTransition.Visibility = Visibility.Collapsed;
+            SceneJeu.Visibility = Visibility.Collapsed;
+            SceneCachette.Visibility = Visibility.Visible;
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            backgroundMusic.Stop();
+            battalSpeach.Stop();
+            phoneRing.Stop();
+        }
+
+
+
     }
 }

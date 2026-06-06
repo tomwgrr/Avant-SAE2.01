@@ -23,12 +23,20 @@
 		<None Remove="Assets\Marius.png" />
 		<None Remove="Assets\menu.png" />
 		<None Remove="Assets\Scene.png" />
+		<None Remove="Assets\SlideUnderTable.mp4" />
 		<None Remove="Assets\Tom.png" />
+		<None Remove="Assets\UnderTable.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Compile Include="Entity\Entity.cs" />
 	  <Compile Include="Entity\Marius.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Assets\SlideUnderTable.mp4">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -54,6 +62,9 @@
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="Assets\Tom.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\UnderTable.jpg">
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
 	</ItemGroup>

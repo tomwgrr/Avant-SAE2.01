@@ -7,15 +7,43 @@
         mc:Ignorable="d"
         Title="PlayGame"
         WindowStyle="None"
-        WindowState="Maximized">
-    <Grid>
-        <Image Source="/Assets/Scene.png" Stretch="UniformToFill"/>
+        WindowState="Maximized"
+        KeyDown="Window_KeyDown">
 
+    <Window.Resources>
+        <Storyboard x:Key="AnimationCache">
+            <DoubleAnimation Storyboard.TargetName="SceneJeu" 
+                             Storyboard.TargetProperty="Opacity" 
+                             From="1.0" To="0.0" Duration="0:0:0.5"/>
+        </Storyboard>
+
+        <Storyboard x:Key="AnimationSortir">
+            <DoubleAnimation Storyboard.TargetName="SceneJeu" 
+                             Storyboard.TargetProperty="Opacity" 
+                             From="0.0" To="1.0" Duration="0:0:0.5"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <Grid>
+        <Grid x:Name="SceneJeu" Visibility="Visible">
+            <Image Source="/Assets/Scene.png" Stretch="UniformToFill"/>
             <Button x:Name="MuteCallButton" Content="Mute Call"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Margin="724,19,0,0"
-                Click="mutecall"/>
-        <Canvas x:Name="CanvasPopups"/>
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="724,19,0,0"
+                    Click="mutecall"/>
+            <Canvas x:Name="CanvasPopups"/>
+        </Grid>
+
+        <Grid x:Name="SceneCachette" Visibility="Collapsed" Background="Black">
+            <Image Source="/Assets/UnderTable.jpg" Stretch="UniformToFill"/>
+        </Grid>
+        <MediaElement x:Name="VideoTransition" 
+                  Source="Assets/SlideUnderTable.mp4" 
+                  LoadedBehavior="Manual" 
+                  UnloadedBehavior="Stop"
+                  Stretch="UniformToFill" 
+                  Visibility="Collapsed"
+                  MediaEnded="VideoTransition_MediaEnded"/>
     </Grid>
 </Window>
