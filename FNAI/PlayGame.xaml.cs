@@ -97,7 +97,7 @@ namespace FNAI
 
         private void TimerApparition_Tick(object sender, EventArgs e)
         {
-            if (random.Next(1, 2) == 1)
+            if (random.Next(1, 30) == 1)
             {
               
                 int pvDeBase = random.Next(1, 3);
