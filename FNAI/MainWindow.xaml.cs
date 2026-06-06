@@ -18,6 +18,18 @@ namespace FNAI
         {
             InitializeComponent();
             InitialiserMusique();
+            try
+            {
+                var streamInfo = Application.GetResourceStream(new Uri("pack://application:,,,/Assets/Giant.cur"));
+                if (streamInfo != null)
+                {
+                    this.Cursor = new Cursor(streamInfo.Stream);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors du chargement du curseur : " + ex.Message);
+            }
         }
 
         private void End(object sender, RoutedEventArgs e)
@@ -83,8 +95,5 @@ namespace FNAI
                 case Button button when button == exitButton : exitButton.Content = "Exit"; break;
             }
         }
-
-
-
     }
 }

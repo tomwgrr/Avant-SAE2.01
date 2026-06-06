@@ -13,6 +13,18 @@ namespace FNAI
         public Loading()
         {
             InitializeComponent();
+            try
+            {
+                var streamInfo = Application.GetResourceStream(new Uri("pack://application:,,,/Assets/Giant.cur"));
+                if (streamInfo != null)
+                {
+                    this.Cursor = new Cursor(streamInfo.Stream);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors du chargement du curseur : " + ex.Message);
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -63,7 +75,7 @@ namespace FNAI
             fadeIn.Completed += (_, _) =>
             {
                 // Attend 2s puis fade out
-                var wait = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2.0) };
+                var wait = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1.0) };
                 wait.Tick += (_, _) => { wait.Stop(); FadeOut(); };
                 wait.Start();
             };
