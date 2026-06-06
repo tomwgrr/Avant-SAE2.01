@@ -16,11 +16,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Remove="Assets\Battal.png" />
 		<None Remove="Assets\FiveFontsatFreddy%27s-Regular.ttf" />
 		<None Remove="Assets\freddy.jpeg" />
 		<None Remove="Assets\Giant.cur" />
 		<None Remove="Assets\Marius.png" />
 		<None Remove="Assets\menu.png" />
+		<None Remove="Assets\Scene.png" />
 		<None Remove="Assets\Tom.png" />
 	</ItemGroup>
 
@@ -30,6 +32,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Resource Include="Assets\Battal.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
 		<Resource Include="Assets\FiveFontsatFreddy's-Regular.ttf">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
@@ -44,6 +49,9 @@
 		</Resource>
 		<Resource Include="Assets\menu.png">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\Scene.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="Assets\Tom.png">
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>

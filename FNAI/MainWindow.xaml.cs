@@ -48,6 +48,7 @@ namespace FNAI
             ArreterMusiqueLobby();
             PlayGame playGame = new PlayGame();
             playGame.Show();
+            this.Close();
         }
 
         private void Selected(object sender, MouseEventArgs e)
