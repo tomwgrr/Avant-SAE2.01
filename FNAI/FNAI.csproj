@@ -21,6 +21,9 @@
 		<None Remove="Assets\freddy.jpeg" />
 		<None Remove="Assets\Giant.cur" />
 		<None Remove="Assets\Marius.png" />
+		<None Remove="Assets\marius\Desk.png" />
+		<None Remove="Assets\marius\FlashedonDesk.png" />
+		<None Remove="Assets\marius\Stand.png" />
 		<None Remove="Assets\menu.png" />
 		<None Remove="Assets\Scene.png" />
 		<None Remove="Assets\Tom.png" />
@@ -45,6 +48,15 @@
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="Assets\Marius.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\marius\Desk.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\marius\FlashedonDesk.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\marius\Stand.png">
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="Assets\menu.png">
