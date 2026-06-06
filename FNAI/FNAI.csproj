@@ -22,6 +22,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Include="Entity\Entity.cs" />
+	  <Compile Include="Entity\Marius.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Resource Include="Assets\FiveFontsatFreddy's-Regular.ttf">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
@@ -35,7 +40,6 @@
 
 	<ItemGroup>
 		<Folder Include="Music\" />
-		<Folder Include="Entity\" />
 	</ItemGroup>
 
 	<ItemGroup>
