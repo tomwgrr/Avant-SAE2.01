@@ -16,13 +16,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Remove="Assets\Battal.png" />
 		<None Remove="Assets\FiveFontsatFreddy%27s-Regular.ttf" />
 		<None Remove="Assets\freddy.jpeg" />
 		<None Remove="Assets\Giant.cur" />
+		<None Remove="Assets\Marius.png" />
 		<None Remove="Assets\menu.png" />
+		<None Remove="Assets\Scene.png" />
+		<None Remove="Assets\Tom.png" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Include="Entity\Entity.cs" />
+	  <Compile Include="Entity\Marius.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="Assets\Battal.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
 		<Resource Include="Assets\FiveFontsatFreddy's-Regular.ttf">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
@@ -32,14 +44,22 @@
 		<Resource Include="Assets\Giant.cur">
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
+		<Resource Include="Assets\Marius.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
 		<Resource Include="Assets\menu.png">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\Scene.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\Tom.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
 	</ItemGroup>
 
 	<ItemGroup>
 		<Folder Include="Music\" />
-		<Folder Include="Entity\" />
 	</ItemGroup>
 
 	<ItemGroup>
