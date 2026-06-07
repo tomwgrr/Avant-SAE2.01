@@ -83,10 +83,10 @@
                                    Stretch="Uniform"
                                    Source="/Assets/marius/Stand.png" Visibility="Collapsed" Opacity="0.1"/>
                             <Image x:Name="StandingMarius" 
-                                   Canvas.Left="564" Canvas.Top="181"
-                                   Height="371" Width="184"
+                                   Canvas.Left="447" Canvas.Top="133"
+                                   Height="320" Width="407"
                                    Stretch="Uniform"
-                                   Source="/Assets/marius/Stand.png" Visibility="Collapsed" Opacity="0.25"/>
+                                   Source="/Assets/marius/Stand.png" Visibility="Collapsed" Opacity="0.25" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
                             <Image x:Name="MariusOnDesk" 
                                    Canvas.Left="490" Canvas.Top="267"
