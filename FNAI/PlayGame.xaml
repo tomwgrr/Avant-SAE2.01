@@ -67,15 +67,11 @@
                     </ModelVisual3D.Content>
                 </ModelVisual3D>
             </Viewport3D>
-
-            <!-- Grid invisible qui sert de source au VisualBrush -->
             <Grid Opacity="0" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Grid x:Name="ContenuBureau2D" Height="900" Width="1600">
 
-                    <!-- Fond de la scène bureau -->
-                    <Image Source="/Assets/Scene.png" Stretch="UniformToFill"/>
 
-                    <!-- Sprites Marius -->
+                    <Image Source="/Assets/Scene.png" Stretch="UniformToFill"/>
                     <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Canvas Width="1280" Height="720" ClipToBounds="False">
                             <Button x:Name="MuteCallButton"
@@ -105,8 +101,6 @@
                                    Source="/Assets/marius/FlashedonDesk.png" Visibility="Collapsed"/>
                         </Canvas>
                     </Viewbox>
-
-                    <!-- Vidéo de transition -->
                     <MediaElement x:Name="VideoTransition" 
                                   Source="Assets/SlideUnderTable.mp4"
                                   LoadedBehavior="Manual" 
@@ -115,8 +109,6 @@
                                   Visibility="Collapsed" 
                                   MediaEnded="VideoTransition_MediaEnded"/>
 
-                    <!-- Scène cachette : par-dessus tout, dans ContenuBureau2D
-                         pour être capturée par le VisualBrush -->
                     <Grid x:Name="SceneCachette" Width="1600" Height="900" Visibility="Collapsed">
                         <Rectangle Fill="Black"/>
                         <Image Source="/Assets/UnderTable.jpg" Stretch="UniformToFill"/>

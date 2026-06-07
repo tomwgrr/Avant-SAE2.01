@@ -57,7 +57,7 @@ namespace FNAI
 
         private void InitialiserBattalSpeach()
         {
-            battalSpeach.Open(new Uri(@"Music\PhoneCall.m4a", UriKind.RelativeOrAbsolute));
+            battalSpeach.Open(new Uri(@"Music\PhoneCall.mp3", UriKind.RelativeOrAbsolute));
             phoneRing.Open(new Uri(@"Music\phonering.mp3", UriKind.RelativeOrAbsolute));
             phoneRing.Play();
             phoneRing.MediaEnded += (s, e) => { battalSpeach.Play(); };

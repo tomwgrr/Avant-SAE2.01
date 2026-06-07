@@ -82,17 +82,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Music\" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Update="Music\AmbianceMusic.mp3">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="Music\LobbyMusic.mp3">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Music\PhoneCall.m4a">
+		<None Update="Music\PhoneCall.mp3">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="Music\phonering.mp3">
