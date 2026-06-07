@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using System.Windows.Media.Media3D;
 
 namespace FNAI
 {
@@ -18,6 +19,8 @@ namespace FNAI
         private Random random = new Random();
         private DispatcherTimer timerApparition;
         private bool isTransitioning = false;
+        private bool isHidding = false;
+
 
         public PlayGame()
         {
@@ -70,28 +73,24 @@ namespace FNAI
             backgroundMusic.Play();
         }
 
-        private void mutecall(object sender, RoutedEventArgs e)
-        {
-            phoneRing.Stop();
-            battalSpeach.Stop();
-        }
+   
 
-        private void CreerNouvellePopup(int pointsDeVie)
-        {
-            PopupInvasion popup = new PopupInvasion(pointsDeVie);
-            popup.DemandeFermeture += (s, e) => { CanvasPopups.Children.Remove(popup); };
-            popup.DemandeDuplication += (s, e) => { CreerNouvellePopup(2); };
+        //private void CreerNouvellePopup(int pointsDeVie)
+        //{
+            //PopupInvasion popup = new PopupInvasion(pointsDeVie);
+            //popup.DemandeFermeture += (s, e) => { CanvasPopups.Children.Remove(popup); };
+           // popup.DemandeDuplication += (s, e) => { CreerNouvellePopup(2); };
 
-            double xMax = CanvasPopups.ActualWidth > 0 ? CanvasPopups.ActualWidth - 200 : 400;
-            double yMax = CanvasPopups.ActualHeight > 0 ? CanvasPopups.ActualHeight - 120 : 300;
+            //double xMax = CanvasPopups.ActualWidth > 0 ? CanvasPopups.ActualWidth - 200 : 400;
+            //double yMax = CanvasPopups.ActualHeight > 0 ? CanvasPopups.ActualHeight - 120 : 300;
 
-            double x = random.Next(0, (int)xMax);
-            double y = random.Next(0, (int)yMax);
+            //double x = random.Next(0, (int)xMax);
+            //double y = random.Next(0, (int)yMax);
 
-            Canvas.SetLeft(popup, x);
-            Canvas.SetTop(popup, y);
-            CanvasPopups.Children.Add(popup);
-        }
+            //Canvas.SetLeft(popup, x);
+            //Canvas.SetTop(popup, y);
+            //CanvasPopups.Children.Add(popup);
+        //}
 
         public void TriggerFlash()
         {
@@ -107,26 +106,28 @@ namespace FNAI
             if (random.Next(1, 300) == 1)
             {
                 int pvDeBase = random.Next(1, 3);
-                CreerNouvellePopup(pvDeBase);
+                // CreerNouvellePopup(pvDeBase);
             }
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            // Transition avec Espace
-            if (e.Key == Key.Space && !isTransitioning)
+            if (e.Key == Key.Space && !isTransitioning) // Vérifie que la barre d'espace est pressée et qu'une transition n'est pas déjà en cours
             {
-                if (SceneJeu.Visibility == Visibility.Visible)
+                if (e.Key == Key.Space && !isTransitioning)
                 {
-                    isTransitioning = true;
-                    VideoTransition.Visibility = Visibility.Visible;
-                    VideoTransition.Position = TimeSpan.Zero;
-                    VideoTransition.Play();
-                }
-                else
-                {
-                    SceneCachette.Visibility = Visibility.Collapsed;
-                    SceneJeu.Visibility = Visibility.Visible;
+                    if (!isHidding)
+                    {
+                        isTransitioning = true;
+                        VideoTransition.Visibility = Visibility.Visible;
+                        VideoTransition.Position = TimeSpan.Zero;
+                        VideoTransition.Play();
+                    }
+                    else
+                    {
+                        SceneCachette.Visibility = Visibility.Collapsed;
+                        isHidding = false;
+                    }
                 }
             }
 
@@ -139,13 +140,18 @@ namespace FNAI
                 battalSpeach?.Stop();
                 phoneRing?.Stop();
             }
+            if (e.Key == Key.A)
+            {
+                phoneRing.Stop();
+                battalSpeach.Stop();
+            }
         }
 
         private void VideoTransition_MediaEnded(object sender, RoutedEventArgs e)
         {
             isTransitioning = false;
+            isHidding = true;
             VideoTransition.Visibility = Visibility.Collapsed;
-            SceneJeu.Visibility = Visibility.Collapsed;
             SceneCachette.Visibility = Visibility.Visible;
         }
 
@@ -154,6 +160,24 @@ namespace FNAI
             backgroundMusic?.Stop();
             battalSpeach?.Stop();
             phoneRing?.Stop();
+          
+        }
+        /// <summary>
+        /// Gère le mouvement de la souris pour faire tourner la caméra en fonction de la position horizontale de la souris dans la fenêtre. Plus la souris est à gauche, plus la caméra regarde vers la gauche, et inversement.   
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_MouseMove(object sender, MouseEventArgs e)
+        {
+            
+            double mouseX = e.GetPosition(this).X; // Récupère la position X de la souris par rapport à la fenêtre
+            double windowWidth = this.ActualWidth; // Récupère la largeur de la fenêtre
+            double normalizedX = (mouseX / windowWidth) * 2 - 1; // Normalise la position X entre -1 et 1 en gros pour que -1 soit à gauche, 0 au centre et 1 à droite
+            double maxAngle = 25;
+            double angleInRadians = (normalizedX * maxAngle) * (Math.PI / 180); //La conversion en radians
+            double lookX = Math.Sin(angleInRadians); // Calcule la composante X de la direction de regard en fonction de l'angle
+            double lookZ = -Math.Cos(angleInRadians); // Calcule la composante Z de la direction de regard en fonction de l'angle (négatif pour que regarder vers la droite donne une composante Z négative)
+            ControlCamera.LookDirection = new Vector3D(lookX, 0, lookZ); // Met à jour la direction de regard de la caméra
         }
     }
 }

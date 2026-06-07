@@ -28,6 +28,11 @@ namespace FNAI.Entity
             };
             _timerPrincipal.Start();
         }
+        ~Marius()
+        {
+            
+        }
+
         #endregion
 
         #region --- IA ---

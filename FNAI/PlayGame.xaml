@@ -8,8 +8,8 @@
         Title="PlayGame"
         WindowStyle="None"
         WindowState="Maximized"
-        KeyDown="Window_KeyDown">
-
+        KeyDown="Window_KeyDown"
+        MouseMove="Window_MouseMove">
     <Window.Resources>
         <Storyboard x:Key="AnimationCache">
             <DoubleAnimation Storyboard.TargetName="SceneJeu" 
@@ -25,58 +25,110 @@
     </Window.Resources>
 
     <Grid>
-        <!-- Scène principale avec les éléments de jeu et Marius -->
         <Grid x:Name="SceneJeu" Visibility="Visible">
-            <Image Source="/Assets/Scene.png" Stretch="UniformToFill"/>
 
-            <Viewbox Stretch="Uniform">
-                <Canvas Width="1280" Height="720" ClipToBounds="False">
-                    <Button x:Name="MuteCallButton" Content="Mute Call"
-                            Canvas.Left="724" Canvas.Top="19"
-                            Click="mutecall"/>
+            <Viewport3D x:Name="MainViewport">
+                <Viewport3D.Camera>
+                    <PerspectiveCamera x:Name="ControlCamera" 
+                                       Position="0,0,0" 
+                                       LookDirection="0,0,-1" 
+                                       FieldOfView="93" />
+                </Viewport3D.Camera>
 
-                    <Image x:Name="FarAwayStandingMarius" 
-                           Canvas.Left="610" Canvas.Top="153"
-                           Height="227" Width="91"
-                           Stretch="Uniform"
-                           Source="/Assets/marius/Stand.png" Visibility="Collapsed" Opacity="0.1"/>
+                <ModelVisual3D>
+                    <ModelVisual3D.Content>
+                        <Model3DGroup>
+                            <AmbientLight Color="White" />
 
-                    <Image x:Name="StandingMarius" 
-                           Canvas.Left="564" Canvas.Top="181"
-                           Height="371" Width="184"
-                           Stretch="Uniform"
-                           Source="/Assets/marius/Stand.png" Visibility="Collapsed" Opacity="0.25"/>
+                            <GeometryModel3D>
+                                <GeometryModel3D.Geometry>
+                                    <MeshGeometry3D 
+                                        Positions="-2.5,1.5,-0.5   -2.18,1.5,-1.23  -1.77,1.5,-1.77  -1.25,1.5,-2.17  -0.65,1.5,-2.42  0,1.5,-2.5  0.65,1.5,-2.42  1.25,1.5,-2.17  1.77,1.5,-1.77  2.18,1.5,-1.23  2.5,1.5,-0.5
+                                                   -2.5,-1.5,-0.5  -2.18,-1.5,-1.23 -1.77,-1.5,-1.77 -1.25,-1.5,-2.17 -0.65,-1.5,-2.42 0,-1.5,-2.5 0.65,-1.5,-2.42 1.25,-1.5,-2.17 1.77,-1.5,-1.77 2.18,-1.5,-1.23 2.5,-1.5,-0.5"
+                                        
+                                        TextureCoordinates="0,0   0.1,0   0.2,0   0.3,0   0.4,0   0.5,0   0.6,0   0.7,0   0.8,0   0.9,0   1,0
+                                                            0,1   0.1,1   0.2,1   0.3,1   0.4,1   0.5,1   0.6,1   0.7,1   0.8,1   0.9,1   1,1"
+                                        
+                                        TriangleIndices="0,11,1   1,11,12   1,12,2   2,12,13   2,13,3   3,13,14
+                                                         3,14,4   4,14,15   4,15,5   5,15,16   5,16,6   6,16,17
+                                                         6,17,7   7,17,18   7,18,8   8,18,19   8,19,9   9,19,20
+                                                         9,20,10  10,20,21" />
+                                </GeometryModel3D.Geometry>
 
-                    <Image x:Name="MariusOnDesk" 
-                           Canvas.Left="490" Canvas.Top="267"
-                           Height="344" Width="472"
-                           Stretch="Uniform"
-                           Source="/Assets/marius/Desk.png" Visibility="Collapsed"/>
+                                <GeometryModel3D.Material>
+                                    <DiffuseMaterial>
+                                        <DiffuseMaterial.Brush>
+                                            <VisualBrush Visual="{Binding ElementName=ContenuBureau2D}" 
+                                                         RenderOptions.CachingHint="Cache" />
+                                        </DiffuseMaterial.Brush>
+                                    </DiffuseMaterial>
+                                </GeometryModel3D.Material>
+                            </GeometryModel3D>
+                        </Model3DGroup>
+                    </ModelVisual3D.Content>
+                </ModelVisual3D>
+            </Viewport3D>
 
-                    <Image x:Name="MariusFlashOnDesk" 
-                           Canvas.Left="436" Canvas.Top="267"
-                           Height="344" Width="513"
-                           Stretch="Fill"
-                           Source="/Assets/marius/FlashedonDesk.png" Visibility="Collapsed"/>
-                </Canvas>
-            </Viewbox>
+            <!-- Grid invisible qui sert de source au VisualBrush -->
+            <Grid Opacity="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Grid x:Name="ContenuBureau2D" Height="900" Width="1600">
+
+                    <!-- Fond de la scène bureau -->
+                    <Image Source="/Assets/Scene.png" Stretch="UniformToFill"/>
+
+                    <!-- Sprites Marius -->
+                    <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Canvas Width="1280" Height="720" ClipToBounds="False">
+                            <Button x:Name="MuteCallButton"
+                                    KeyDown="Window_KeyDown" Visibility="Collapsed"/>
+
+                            <Image x:Name="FarAwayStandingMarius" 
+                                   Canvas.Left="610" Canvas.Top="153"
+                                   Height="227" Width="91"
+                                   Stretch="Uniform"
+                                   Source="/Assets/marius/Stand.png" Visibility="Collapsed" Opacity="0.1"/>
+
+                            <Image x:Name="StandingMarius" 
+                                   Canvas.Left="564" Canvas.Top="181"
+                                   Height="371" Width="184"
+                                   Stretch="Uniform"
+                                   Source="/Assets/marius/Stand.png" Visibility="Collapsed" Opacity="0.25"/>
+
+                            <Image x:Name="MariusOnDesk" 
+                                   Canvas.Left="490" Canvas.Top="267"
+                                   Height="344" Width="472"
+                                   Stretch="Uniform"
+                                   Source="/Assets/marius/Desk.png" Visibility="Collapsed"/>
+
+                            <Image x:Name="MariusFlashOnDesk" 
+                                   Canvas.Left="436" Canvas.Top="267"
+                                   Height="344" Width="513"
+                                   Stretch="Fill"
+                                   Source="/Assets/marius/FlashedonDesk.png" Visibility="Collapsed"/>
+                        </Canvas>
+                    </Viewbox>
+
+                    <!-- Vidéo de transition -->
+                    <MediaElement x:Name="VideoTransition" 
+                                  Source="Assets/SlideUnderTable.mp4"
+                                  LoadedBehavior="Manual" 
+                                  UnloadedBehavior="Stop" 
+                                  Stretch="UniformToFill" 
+                                  Visibility="Collapsed" 
+                                  MediaEnded="VideoTransition_MediaEnded"/>
+
+                    <!-- Scène cachette : par-dessus tout, dans ContenuBureau2D
+                         pour être capturée par le VisualBrush -->
+                    <Grid x:Name="SceneCachette" Width="1600" Height="900" Visibility="Collapsed">
+                        <Rectangle Fill="Black"/>
+                        <Image Source="/Assets/UnderTable.jpg" Stretch="UniformToFill"/>
+                    </Grid>
+
+                </Grid>
+            </Grid>
 
             <Canvas x:Name="CanvasPopups"/>
             <Rectangle x:Name="FlashOverlay" Fill="Black" Opacity="0" IsHitTestVisible="False"/>
         </Grid>
-
-        <!-- Scène sous la table -->
-        <Grid x:Name="SceneCachette" Visibility="Collapsed" Background="Black">
-            <Image Source="/Assets/UnderTable.jpg" Stretch="UniformToFill"/>
-        </Grid>
-
-        <!-- Transition vidéo -->
-        <MediaElement x:Name="VideoTransition" 
-                      Source="Assets/SlideUnderTable.mp4" 
-                      LoadedBehavior="Manual" 
-                      UnloadedBehavior="Stop"
-                      Stretch="UniformToFill" 
-                      Visibility="Collapsed"
-                      MediaEnded="VideoTransition_MediaEnded"/>
     </Grid>
 </Window>
