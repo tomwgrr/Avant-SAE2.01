@@ -103,6 +103,7 @@ namespace FNAI.Entity
             AfficherMarius(_page);
             _timerPrincipal.Interval = TimeSpan.FromSeconds(5);
             MessageBox.Show("JUMPSCARE !");
+            _page.EndGame();
         }
 
         public void Flash()
@@ -126,6 +127,11 @@ namespace FNAI.Entity
         }
 
         public override void Noise() { }
+        public void Stop()
+        {
+            _timerPrincipal?.Stop();
+            _timerAttaque?.Stop();
+        }
         #endregion
 
         #region --- Affichage ---
