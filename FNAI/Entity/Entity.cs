@@ -9,7 +9,7 @@ namespace FNAI.Entity
     public abstract class Entity
     {
         #region --- Attributs ---
-        private int _AISCore;
+        private int _AISCore = 10; // 1 → 20, plus c'est haut, plus l'IA est agressive
         private bool isAwake;
         #endregion
         protected int AIscore => _AISCore; 

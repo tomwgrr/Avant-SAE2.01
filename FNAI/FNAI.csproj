@@ -17,6 +17,13 @@
 
 	<ItemGroup>
 		<None Remove="Assets\Battal.png" />
+		<None Remove="Assets\Cameras\Cam1Image.png" />
+		<None Remove="Assets\Cameras\Cam2Image.png" />
+		<None Remove="Assets\Cameras\Cam3Image.png" />
+		<None Remove="Assets\Cameras\Cam4Image.png" />
+		<None Remove="Assets\Cameras\Cam5Image.png" />
+		<None Remove="Assets\Cameras\Cam6Image.png" />
+		<None Remove="Assets\Cameras\CameraInterface.png" />
 		<None Remove="Assets\FiveFontsatFreddy%27s-Regular.ttf" />
 		<None Remove="Assets\freddy.jpeg" />
 		<None Remove="Assets\Giant.cur" />
@@ -25,18 +32,34 @@
 		<None Remove="Assets\marius\FlashedonDesk.png" />
 		<None Remove="Assets\marius\Stand.png" />
 		<None Remove="Assets\menu.png" />
+		<None Remove="Assets\OpenCameraVid.mp4" />
 		<None Remove="Assets\Scene.png" />
+		<None Remove="Assets\ScreamerTest.mov" />
+		<None Remove="Assets\ScreamerTest.wmv" />
 		<None Remove="Assets\SlideUnderTable.mp4" />
 		<None Remove="Assets\Tom.png" />
 		<None Remove="Assets\UnderTable.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Resource Include="Assets\Cameras\Cam2Image.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Include="Entity\Battal.cs" />
 	  <Compile Include="Entity\Entity.cs" />
 	  <Compile Include="Entity\Marius.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="Assets\OpenCameraVid.mp4">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\ScreamerTest.mov">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="Assets\SlideUnderTable.mp4">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
@@ -44,6 +67,24 @@
 
 	<ItemGroup>
 		<Resource Include="Assets\Battal.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\Cameras\Cam1Image.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\Cameras\Cam3Image.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\Cameras\Cam4Image.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\Cameras\Cam5Image.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\Cameras\Cam6Image.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\Cameras\CameraInterface.png">
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="Assets\FiveFontsatFreddy's-Regular.ttf">
@@ -72,6 +113,9 @@
 		</Resource>
 		<Resource Include="Assets\Scene.png">
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\ScreamerTest.wmv">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="Assets\Tom.png">
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>

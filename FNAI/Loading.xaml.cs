@@ -6,6 +6,10 @@ using System.Windows.Threading;
 
 namespace FNAI
 {
+    /// <summary>
+    /// Logique d'interaction pour l'écran de chargement (IHM pure).
+    /// Cette classe gère l'introduction visuelle avant le lancement du moteur de jeu.
+    /// </summary>
     public partial class Loading : Window
     {
         private bool _warningDismissed = false;
@@ -13,6 +17,14 @@ namespace FNAI
         public Loading()
         {
             InitializeComponent();
+            ChargerCurseurPersonnalise();
+        }
+
+        /// <summary>
+        /// Charge le curseur personnalisé du jeu.
+        /// </summary>
+        private void ChargerCurseurPersonnalise()
+        {
             try
             {
                 var streamInfo = Application.GetResourceStream(new Uri("pack://application:,,,/Assets/Giant.cur"));
@@ -29,10 +41,11 @@ namespace FNAI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // Blink "appuyez sur une touche"
+            // Lance le clignotement de l'avertissement défini dans le XAML
             var blink = (Storyboard)Resources["WarningBlink"];
             blink.Begin();
 
+            // Écoute des entrées utilisateurs pour passer l'écran
             KeyDown += OnAnyKey;
             MouseDown += OnAnyClick;
         }
@@ -49,6 +62,9 @@ namespace FNAI
             DismissWarning();
         }
 
+        /// <summary>
+        /// Supprime l'écran d'avertissement avec un effet visuel et passe au logo.
+        /// </summary>
         private void DismissWarning()
         {
             _warningDismissed = true;
@@ -58,7 +74,7 @@ namespace FNAI
 
             TriggerFlash();
 
-            // Fade out warning
+            // Fondu enchaîné (Fade out) de l'avertissement
             var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.6));
             fadeOut.Completed += (_, _) =>
             {
@@ -68,13 +84,15 @@ namespace FNAI
             WarningScreen.BeginAnimation(OpacityProperty, fadeOut);
         }
 
+        /// <summary>
+        /// Affiche le logo du jeu FNAI avec un fondu.
+        /// </summary>
         private void ShowLogo()
         {
-            // Fade in logo
             var fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(2));
             fadeIn.Completed += (_, _) =>
             {
-                // Attend 2s puis fade out
+                // Pause de 0.5s avant de lancer le fondu de fermeture
                 var wait = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.5) };
                 wait.Tick += (_, _) => { wait.Stop(); FadeOut(); };
                 wait.Start();
@@ -82,6 +100,9 @@ namespace FNAI
             LogoPanel.BeginAnimation(OpacityProperty, fadeIn);
         }
 
+        /// <summary>
+        /// Quitte l'écran de chargement et ouvre le menu principal.
+        /// </summary>
         private void FadeOut()
         {
             TriggerFlash();
@@ -90,13 +111,17 @@ namespace FNAI
             fadeOut.BeginTime = TimeSpan.FromSeconds(0.2);
             fadeOut.Completed += (_, _) =>
             {
-                var main = new MainWindow();
+                // Transition vers le menu principal
+                MainWindow main = new MainWindow();
                 main.Show();
                 Close();
             };
             BeginAnimation(OpacityProperty, fadeOut);
         }
 
+        /// <summary>
+        /// Effet d'éclair / flash de lumière typique de l'ambiance horreur.
+        /// </summary>
         private void TriggerFlash()
         {
             var flash = new DoubleAnimationUsingKeyFrames();

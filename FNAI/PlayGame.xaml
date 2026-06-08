@@ -11,12 +11,33 @@
         KeyDown="Window_KeyDown"
         MouseMove="Window_MouseMove">
     <Window.Resources>
+        <Style x:Key="CameraButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="3"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <Storyboard x:Key="AnimationCache">
             <DoubleAnimation Storyboard.TargetName="SceneJeu" 
                              Storyboard.TargetProperty="Opacity" 
                              From="1.0" To="0.0" Duration="0:0:0.5"/>
         </Storyboard>
-
         <Storyboard x:Key="AnimationSortir">
             <DoubleAnimation Storyboard.TargetName="SceneJeu" 
                              Storyboard.TargetProperty="Opacity" 
@@ -34,7 +55,6 @@
                                        LookDirection="0,0,-1" 
                                        FieldOfView="93" />
                 </Viewport3D.Camera>
-
                 <ModelVisual3D>
                     <ModelVisual3D.Content>
                         <Model3DGroup>
@@ -44,16 +64,13 @@
                                     <MeshGeometry3D 
                                         Positions="-2.5,1.5,-0.5 -2.18,1.5,-1.23 -1.77,1.5,-1.77 -1.25,1.5,-2.17 -0.65,1.5,-2.42 0,1.5,-2.5 0.65,1.5,-2.42 1.25,1.5,-2.17 1.77,1.5,-1.77 2.18,1.5,-1.23 2.5,1.5,-0.5
                                                    -2.5,-1.5,-0.5 -2.18,-1.5,-1.23 -1.77,-1.5,-1.77 -1.25,-1.5,-2.17 -0.65,-1.5,-2.42 0,-1.5,-2.5 0.65,-1.5,-2.42 1.25,-1.5,-2.17 1.77,-1.5,-1.77 2.18,-1.5,-1.23 2.5,-1.5,-0.5"
-                                        
                                         TextureCoordinates="0,0 0.1,0 0.2,0 0.3,0 0.4,0 0.5,0 0.6,0 0.7,0 0.8,0 0.9,0 1,0
                                                             0,1 0.1,1 0.2,1 0.3,1 0.4,1 0.5,1 0.6,1 0.7,1 0.8,1 0.9,1 1,1"
-                                        
                                         TriangleIndices="0,11,1 1,11,12 1,12,2 2,12,13 2,13,3 3,13,14
                                                          3,14,4 4,14,15 4,15,5 5,15,16 5,16,6 6,16,17
                                                          6,17,7 7,17,18 7,18,8 8,18,19 8,19,9 9,19,20
                                                          9,20,10 10,20,21" />
                                 </GeometryModel3D.Geometry>
-
                                 <GeometryModel3D.Material>
                                     <DiffuseMaterial>
                                         <DiffuseMaterial.Brush>
@@ -67,16 +84,13 @@
                     </ModelVisual3D.Content>
                 </ModelVisual3D>
             </Viewport3D>
+
             <Grid Opacity="0" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Grid x:Name="ContenuBureau2D" Height="900" Width="1600">
-
-
                     <Image Source="/Assets/Scene.png" Stretch="UniformToFill"/>
                     <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Canvas Width="1280" Height="720" ClipToBounds="False">
-                            <Button x:Name="MuteCallButton"
-                                    KeyDown="Window_KeyDown" Visibility="Collapsed"/>
-
+                            <Button x:Name="MuteCallButton" KeyDown="Window_KeyDown" Visibility="Collapsed"/>
                             <Image x:Name="FarAwayStandingMarius" 
                                    Canvas.Left="610" Canvas.Top="153"
                                    Height="227" Width="91"
@@ -87,18 +101,21 @@
                                    Height="371" Width="184"
                                    Stretch="Uniform"
                                    Source="/Assets/marius/Stand.png" Visibility="Collapsed" Opacity="0.25"/>
-
                             <Image x:Name="MariusOnDesk" 
                                    Canvas.Left="490" Canvas.Top="267"
                                    Height="344" Width="472"
                                    Stretch="Uniform"
                                    Source="/Assets/marius/Desk.png" Visibility="Collapsed"/>
-
                             <Image x:Name="MariusFlashOnDesk" 
                                    Canvas.Left="436" Canvas.Top="267"
                                    Height="344" Width="513"
                                    Stretch="Fill"
                                    Source="/Assets/marius/FlashedonDesk.png" Visibility="Collapsed"/>
+                            <Image x:Name="BattalImage" 
+                                   Source="Assets/Battal.png" 
+                                   Visibility="Collapsed"
+                                   Width="300" Height="400"
+                                   Canvas.Left="500" Canvas.Top="100"/>
                         </Canvas>
                     </Viewbox>
                     <MediaElement x:Name="VideoTransition" 
@@ -108,17 +125,73 @@
                                   Stretch="UniformToFill" 
                                   Visibility="Collapsed" 
                                   MediaEnded="VideoTransition_MediaEnded"/>
+                    <MediaElement x:Name="ScreamerTest" 
+                                  KeyDown="Window_KeyDown" 
+                                  Source="Assets/ScreamerTest.wmv" 
+                                  LoadedBehavior="Manual" 
+                                  UnloadedBehavior="Stop" 
+                                  Stretch="UniformToFill" 
+                                  Visibility="Collapsed"/>
 
+                    <MediaElement x:Name="CameraMediaVideoPlay"
+                             Source="Assets/OpenCameraVid.mp4"
+                             LoadedBehavior="Manual" 
+                             UnloadedBehavior="Stop" 
+                             Stretch="UniformToFill" 
+                             Visibility="Collapsed"
+                             MediaEnded="CameraMediaVideoPlay_MediaEnded" />
+                    
                     <Grid x:Name="SceneCachette" Width="1600" Height="900" Visibility="Collapsed">
                         <Rectangle Fill="Black"/>
                         <Image Source="/Assets/UnderTable.jpg" Stretch="UniformToFill"/>
                     </Grid>
+                    
+                    <Image x:Name="Camera1" Source="/Assets/Cameras/Cam1Image.png"
+                                  Stretch="UniformToFill" 
+                                  Visibility="Collapsed"/>
+                    
+                    <Image x:Name="Camera2" Source="/Assets/Cameras/Cam2Image.png"
+                                    Stretch="UniformToFill" 
+                                    Visibility="Collapsed"/>
+                    
+                    <Image x:Name="Camera3" Source="/Assets/Cameras/Cam3Image.png"
+                                  Stretch="UniformToFill" 
+                                  Visibility="Collapsed"/>
+                    
+                    <Image x:Name="Camera4" Source="/Assets/Cameras/Cam4Image.png"
+                                  Stretch="UniformToFill" 
+                                  Visibility="Collapsed"/>
 
+                    <Image x:Name="Camera5" Source="/Assets/Cameras/Cam5Image.png"
+                                    Stretch="UniformToFill" 
+                                    Visibility="Collapsed"/>
+
+                    <Image x:Name="Camera6" Source="/Assets/Cameras/Cam6Image.png"
+                                  Stretch="UniformToFill" 
+                                  Visibility="Collapsed"/>
                 </Grid>
             </Grid>
 
             <Canvas x:Name="CanvasPopups"/>
-            <Rectangle x:Name="FlashOverlay" Fill="Black" Opacity="0" IsHitTestVisible="False"/>
         </Grid>
+
+        <!-- Camera en dehors de SceneJeu -->
+        <Viewbox Stretch="Uniform">
+            <Grid x:Name="Camera"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              Visibility="Collapsed"
+              KeyDown="Window_KeyDown">
+                <Image Source="/Assets/Cameras/CameraInterface.png" Stretch="UniformToFill"/>
+                <Button x:Name="CameraButton1" Tag="1" Style="{StaticResource CameraButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1139,395,0,0" Height="216" Width="234" Click="CameraDisplay"/>
+                <Button x:Name="CameraButton2" Tag="2" Style="{StaticResource CameraButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="688,657,0,0" Height="181" Width="194" Click="CameraDisplay"/>
+                <Button x:Name="CameraButton3" Tag="3" Style="{StaticResource CameraButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="787,191,0,0" Height="170" Width="389" Click="CameraDisplay"/>
+                <Button x:Name="CameraButton4" Tag="4" Style="{StaticResource CameraButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="737,396,0,0" Height="158" Width="227" Click="CameraDisplay"/>
+                <Button x:Name="CameraButton5" Tag="5" Style="{StaticResource CameraButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1199,656,0,0" Height="181" Width="236" Click="CameraDisplay"/>
+                <Button x:Name="CameraButton6" Tag="6" Style="{StaticResource CameraButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1206,191,0,0" Height="170" Width="223" Click="CameraDisplay" />
+            </Grid>
+        </Viewbox>
+
+        <Rectangle x:Name="FlashOverlay" Fill="Black" Opacity="0" IsHitTestVisible="False"/>
     </Grid>
 </Window>
