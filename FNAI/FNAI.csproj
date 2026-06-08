@@ -64,6 +64,7 @@
 	  <Compile Include="Entity\Battal.cs" />
 	  <Compile Include="Entity\Entity.cs" />
 	  <Compile Include="Entity\Marius.cs" />
+	  <Compile Include="Entity\Tom.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
