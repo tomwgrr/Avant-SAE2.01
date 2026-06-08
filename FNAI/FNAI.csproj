@@ -17,6 +17,10 @@
 
 	<ItemGroup>
 		<None Remove="Assets\Battal.png" />
+		<None Remove="Assets\BattalCAM1.jpg" />
+		<None Remove="Assets\BattalCAM2.jpg" />
+		<None Remove="Assets\BattalCAM3.png" />
+		<None Remove="Assets\BattalCAM5.jpg" />
 		<None Remove="Assets\Cameras\Cam1Image.png" />
 		<None Remove="Assets\Cameras\Cam2Image.png" />
 		<None Remove="Assets\Cameras\Cam3Image.png" />
@@ -42,6 +46,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Resource Include="Assets\BattalCAM2.jpg">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Assets\BattalCAM3.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Assets\BattalCAM5.jpg">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
 	  <Resource Include="Assets\Cameras\Cam2Image.png">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
@@ -54,6 +67,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Resource Include="Assets\BattalCAM1.jpg">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
 	  <Content Include="Assets\OpenCameraVid.mp4">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>

@@ -150,15 +150,27 @@
                     <Image x:Name="Camera1" Source="/Assets/Cameras/Cam1Image.png"
                                   Stretch="UniformToFill" 
                                   Visibility="Collapsed"/>
+                    <Image x:Name="Camera1Battal" Source="/Assets/BattalCAM1.jpg"
+                           Stretch="UniformToFill" 
+                           Visibility="Collapsed"/>
                     
+
                     <Image x:Name="Camera2" Source="/Assets/Cameras/Cam2Image.png"
                                     Stretch="UniformToFill" 
                                     Visibility="Collapsed"/>
                     
+                    <Image x:Name="Camera2Battal" Source="/Assets/BattalCAM2.jpg"
+                           Stretch="UniformToFill" 
+                           Visibility="Collapsed"/>
+
                     <Image x:Name="Camera3" Source="/Assets/Cameras/Cam3Image.png"
                                   Stretch="UniformToFill" 
                                   Visibility="Collapsed"/>
                     
+                    <Image x:Name="Camera3Battal" Source="/Assets/BattalCAM3.png"
+                           Stretch="UniformToFill" 
+                           Visibility="Collapsed"/>
+
                     <Image x:Name="Camera4" Source="/Assets/Cameras/Cam4Image.png"
                                   Stretch="UniformToFill" 
                                   Visibility="Collapsed"/>
@@ -166,6 +178,10 @@
                     <Image x:Name="Camera5" Source="/Assets/Cameras/Cam5Image.png"
                                     Stretch="UniformToFill" 
                                     Visibility="Collapsed"/>
+                    
+                    <Image x:Name="Camera5Battal" Source="/Assets/BattalCAM5.jpg"
+                           Stretch="UniformToFill" 
+                           Visibility="Collapsed"/>
 
                     <Image x:Name="Camera6" Source="/Assets/Cameras/Cam6Image.png"
                                   Stretch="UniformToFill" 

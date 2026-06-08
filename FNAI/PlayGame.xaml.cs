@@ -1,5 +1,4 @@
-﻿
-using FNAI.Entity;
+﻿using FNAI.Entity;
 using System;
 using System.Reflection;
 using System.Windows;
@@ -10,6 +9,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Media3D;
 using System.Windows.Threading;
 using System.Runtime.InteropServices;
+
 namespace FNAI
 {
     public partial class PlayGame : Window
@@ -21,21 +21,25 @@ namespace FNAI
         private DispatcherTimer timerApparition;
 
         private bool isCameraOn = false;
-
-
         private bool isTransitioning = false;
-        private Marius marius; // champ de classe
+        private Marius marius;
         private Battal battal;
+
+        public int BattalCamPosition { get; set; } = 1;
         private bool isHidding = false;
 
         public bool IsHidding => isHidding;
+
+     
+        public bool IsTabletOpen => isCameraOn;
+        public int CurrentCameraId { get; private set; } = 0;
+
         public PlayGame()
         {
             InitializeComponent();
             InitialiserBattalSpeach();
             PlayBackGroundMusic();
             InitialiserEntity();
-            
 
             timerApparition = new DispatcherTimer();
             timerApparition.Interval = TimeSpan.FromSeconds(1);
@@ -56,8 +60,7 @@ namespace FNAI
 
         private void InitialiserEntity()
         {
-            // Initialisation de Marius
-            marius = new Marius(Option.MariusScore, this); // pas de "Marius" devant
+            marius = new Marius(Option.MariusScore, this);
             battal = new Battal(Option.BattalScore, this);
         }
 
@@ -87,25 +90,6 @@ namespace FNAI
             backgroundMusic.Play();
         }
 
-   
-
-        //private void CreerNouvellePopup(int pointsDeVie)
-        //{
-            //PopupInvasion popup = new PopupInvasion(pointsDeVie);
-            //popup.DemandeFermeture += (s, e) => { CanvasPopups.Children.Remove(popup); };
-           // popup.DemandeDuplication += (s, e) => { CreerNouvellePopup(2); };
-
-            //double xMax = CanvasPopups.ActualWidth > 0 ? CanvasPopups.ActualWidth - 200 : 400;
-            //double yMax = CanvasPopups.ActualHeight > 0 ? CanvasPopups.ActualHeight - 120 : 300;
-
-            //double x = random.Next(0, (int)xMax);
-            //double y = random.Next(0, (int)yMax);
-
-            //Canvas.SetLeft(popup, x);
-            //Canvas.SetTop(popup, y);
-            //CanvasPopups.Children.Add(popup);
-        //}
-
         public void TriggerFlash()
         {
             var flash = new DoubleAnimationUsingKeyFrames();
@@ -120,30 +104,24 @@ namespace FNAI
             if (random.Next(1, 300) == 1)
             {
                 int pvDeBase = random.Next(1, 3);
-                // CreerNouvellePopup(pvDeBase);
             }
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space && !isTransitioning && isCameraOn == false) // Vérifie que la barre d'espace est pressée et qu'une transition n'est pas déjà en cours et que la caméra n'est pas activée
+            if (e.Key == Key.Space && !isTransitioning && isCameraOn == false)
             {
-                if (e.Key == Key.Space && !isTransitioning)
+                if (!isHidding)
                 {
-                    if (!isHidding)
-                    {
-                        isTransitioning = true;
-                        battal.OnPlayerHide();
-                        VideoTransition.Visibility = Visibility.Visible;
-                        VideoTransition.Position = TimeSpan.Zero;
-                        VideoTransition.Play();
-                    }
-                    else
-                    {
-                        SceneCachette.Visibility = Visibility.Collapsed;
-                        isHidding = false;
-                        battal.OnPlayerReveal();
-                    }
+                    isTransitioning = true;
+                    VideoTransition.Visibility = Visibility.Visible;
+                    VideoTransition.Position = TimeSpan.Zero;
+                    VideoTransition.Play();
+                }
+                else
+                {
+                    SceneCachette.Visibility = Visibility.Collapsed;
+                    isHidding = false;
                 }
             }
 
@@ -170,33 +148,33 @@ namespace FNAI
             }
             if (e.Key == Key.Escape)
             {
-                if (e.Key == Key.Escape)
+                if (Camera1.Visibility == Visibility.Visible ||
+                    Camera2.Visibility == Visibility.Visible ||
+                    Camera3.Visibility == Visibility.Visible ||
+                    Camera4.Visibility == Visibility.Visible ||
+                    Camera5.Visibility == Visibility.Visible ||
+                    Camera6.Visibility == Visibility.Visible)
                 {
-                    if (Camera1.Visibility == Visibility.Visible ||
-                        Camera2.Visibility == Visibility.Visible ||
-                        Camera3.Visibility == Visibility.Visible ||
-                        Camera4.Visibility == Visibility.Visible ||
-                        Camera5.Visibility == Visibility.Visible ||
-                        Camera6.Visibility == Visibility.Visible)
-                    {
-                        Camera1.Visibility = Visibility.Collapsed;
-                        Camera2.Visibility = Visibility.Collapsed;
-                        Camera3.Visibility = Visibility.Collapsed;
-                        Camera4.Visibility = Visibility.Collapsed;
-                        Camera5.Visibility = Visibility.Collapsed;
-                        Camera6.Visibility = Visibility.Collapsed;
+                    Camera1.Visibility = Visibility.Collapsed;
+                    Camera2.Visibility = Visibility.Collapsed;
+                    Camera3.Visibility = Visibility.Collapsed;
+                    Camera4.Visibility = Visibility.Collapsed;
+                    Camera5.Visibility = Visibility.Collapsed;
+                    Camera6.Visibility = Visibility.Collapsed;
 
-                       
-                        Camera.Visibility = Visibility.Visible;
-                    }
-                    else if (isCameraOn)
-                    {
-                      
-                        Camera_IsClosed();
-                    }
+                    Camera.Visibility = Visibility.Visible;
+
+                    // Retour sur le plan principal
+                    CurrentCameraId = 0;
+                    MettreAJourAffichageBattal();
+                }
+                else if (isCameraOn)
+                {
+                    Camera_IsClosed();
                 }
             }
         }
+
         private void VideoTransition_MediaEnded(object sender, RoutedEventArgs e)
         {
             if (isCameraOn == false)
@@ -222,6 +200,7 @@ namespace FNAI
             battal?.Stop();
             marius?.Stop();
         }
+
         public void EndGame()
         {
             backgroundMusic?.Stop();
@@ -234,32 +213,29 @@ namespace FNAI
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
-          
         }
-        /// <summary>
-        /// Gère le mouvement de la souris pour faire tourner la caméra en fonction de la position horizontale de la souris dans la fenêtre. Plus la souris est à gauche, plus la caméra regarde vers la gauche, et inversement.   
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void Window_MouseMove(object sender, MouseEventArgs e)
         {
-            
-            double mouseX = e.GetPosition(this).X; // Récupère la position X de la souris par rapport à la fenêtre
-            double windowWidth = this.ActualWidth; // Récupère la largeur de la fenêtre
-            double normalizedX = (mouseX / windowWidth) * 2 - 1; // Normalise la position X entre -1 et 1 en gros pour que -1 soit à gauche, 0 au centre et 1 à droite
+            double mouseX = e.GetPosition(this).X;
+            double windowWidth = this.ActualWidth;
+            double normalizedX = (mouseX / windowWidth) * 2 - 1;
             double maxAngle = 25;
-            double angleInRadians = (normalizedX * maxAngle) * (Math.PI / 180); //La conversion en radians
-            double lookX = Math.Sin(angleInRadians); // Calcule la composante X de la direction de regard en fonction de l'angle
-            double lookZ = -Math.Cos(angleInRadians); // Calcule la composante Z de la direction de regard en fonction de l'angle (négatif pour que regarder vers la droite donne une composante Z négative)
-            ControlCamera.LookDirection = new Vector3D(lookX, 0, lookZ); // Met à jour la direction de regard de la caméra
+            double angleInRadians = (normalizedX * maxAngle) * (Math.PI / 180);
+            double lookX = Math.Sin(angleInRadians);
+            double lookZ = -Math.Cos(angleInRadians);
+            ControlCamera.LookDirection = new Vector3D(lookX, 0, lookZ);
         }
 
         private void Camera_IsClosed()
         {
             isCameraOn = false;
+            CurrentCameraId = 0; // Sécurité
             Camera.Visibility = Visibility.Collapsed;
             CameraMediaVideoPlay.Stop();
             CameraMediaVideoPlay.Visibility = Visibility.Collapsed;
+
+            MettreAJourAffichageBattal();
         }
 
         private void CameraDisplay(object sender, RoutedEventArgs e)
@@ -268,6 +244,8 @@ namespace FNAI
             if (boutonClique != null && boutonClique.Tag != null)
             {
                 string numeroCamera = boutonClique.Tag.ToString();
+
+                CurrentCameraId = int.Parse(numeroCamera);
 
                 switch (numeroCamera)
                 {
@@ -296,8 +274,27 @@ namespace FNAI
                         Camera6.Visibility = Visibility.Visible;
                         break;
                 }
+
+           
+                MettreAJourAffichageBattal();
             }
-            
+        }
+
+       
+        public void MettreAJourAffichageBattal()
+        {
+            Camera1Battal.Visibility = Visibility.Collapsed;
+            Camera2Battal.Visibility = Visibility.Collapsed;
+            Camera3Battal.Visibility = Visibility.Collapsed;
+            Camera5Battal.Visibility = Visibility.Collapsed;
+
+            if (isCameraOn)
+            {
+                if (CurrentCameraId == 1 && BattalCamPosition == 1) Camera1Battal.Visibility = Visibility.Visible;
+                if (CurrentCameraId == 2 && BattalCamPosition == 2) Camera2Battal.Visibility = Visibility.Visible;
+                if (CurrentCameraId == 3 && BattalCamPosition == 3) Camera3Battal.Visibility = Visibility.Visible;
+                if (CurrentCameraId == 5 && BattalCamPosition == 5) Camera5Battal.Visibility = Visibility.Visible;
+            }
         }
     }
 }
