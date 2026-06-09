@@ -83,6 +83,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="NAudio" Version="2.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Resource Include="Assets\Battal.png">
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>

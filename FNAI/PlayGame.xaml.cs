@@ -9,6 +9,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Media3D;
 using System.Windows.Threading;
 using System.Runtime.InteropServices;
+using NAudio;
+using NAudio.Wave;
 
 namespace FNAI
 {
@@ -36,6 +38,7 @@ namespace FNAI
 
         public PlayGame()
         {
+          
             InitializeComponent();
             InitialiserBattalSpeach();
             PlayBackGroundMusic();
@@ -67,6 +70,7 @@ namespace FNAI
         private void InitialiserBattalSpeach()
         {
             battalSpeach.Open(new Uri(@"Music\PhoneCall.mp3", UriKind.RelativeOrAbsolute));
+            battalSpeach.Volume = 2;
             phoneRing.Open(new Uri(@"Music\phonering.mp3", UriKind.RelativeOrAbsolute));
             phoneRing.Play();
             phoneRing.MediaEnded += (s, e) => { battalSpeach.Play(); };
