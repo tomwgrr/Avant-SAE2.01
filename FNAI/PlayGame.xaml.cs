@@ -11,6 +11,7 @@ using System.Windows.Threading;
 using System.Runtime.InteropServices;
 using NAudio;
 using NAudio.Wave;
+using System.Security.Policy;
 
 namespace FNAI
 {
@@ -19,6 +20,7 @@ namespace FNAI
         private MediaPlayer battalSpeach = new MediaPlayer();
         private MediaPlayer phoneRing = new MediaPlayer();
         private MediaPlayer backgroundMusic = new MediaPlayer();
+        private MediaPlayer CameraSoundEffect = new MediaPlayer();
         private Random random = new Random();
         private DispatcherTimer timerApparition;
 
@@ -43,6 +45,7 @@ namespace FNAI
             InitialiserBattalSpeach();
             PlayBackGroundMusic();
             InitialiserEntity();
+            PlayCameraSoundEffect();
 
             timerApparition = new DispatcherTimer();
             timerApparition.Interval = TimeSpan.FromSeconds(1);
@@ -159,6 +162,8 @@ namespace FNAI
                     Camera5.Visibility == Visibility.Visible ||
                     Camera6.Visibility == Visibility.Visible)
                 {
+                    CameraSoundEffect.Position = TimeSpan.Zero;
+                    CameraSoundEffect.Play();
                     Camera1.Visibility = Visibility.Collapsed;
                     Camera2.Visibility = Visibility.Collapsed;
                     Camera3.Visibility = Visibility.Collapsed;
@@ -177,6 +182,11 @@ namespace FNAI
                     Camera_IsClosed();
                 }
             }
+        }
+
+        private void PlayCameraSoundEffect()
+        {
+            CameraSoundEffect.Open(new Uri(@"Music\Put Down.mp3", UriKind.RelativeOrAbsolute));
         }
 
         private void VideoTransition_MediaEnded(object sender, RoutedEventArgs e)
@@ -203,6 +213,7 @@ namespace FNAI
             phoneRing?.Stop();
             battal?.Stop();
             marius?.Stop();
+            CameraSoundEffect.Stop();
         }
 
         public void EndGame()
@@ -256,26 +267,38 @@ namespace FNAI
                     case "1":
                         Camera.Visibility = Visibility.Collapsed;
                         Camera1.Visibility = Visibility.Visible;
+                        CameraSoundEffect.Position = TimeSpan.Zero;
+                        CameraSoundEffect.Play();
                         break;
                     case "2":
                         Camera.Visibility = Visibility.Collapsed;
                         Camera2.Visibility = Visibility.Visible;
+                        CameraSoundEffect.Position = TimeSpan.Zero;
+                        CameraSoundEffect.Play();
                         break;
                     case "3":
                         Camera.Visibility = Visibility.Collapsed;
                         Camera3.Visibility = Visibility.Visible;
+                        CameraSoundEffect.Position = TimeSpan.Zero;
+                        CameraSoundEffect.Play();
                         break;
                     case "4":
                         Camera.Visibility = Visibility.Collapsed;
                         Camera4.Visibility = Visibility.Visible;
+                        CameraSoundEffect.Position = TimeSpan.Zero;
+                        CameraSoundEffect.Play();
                         break;
                     case "5":
                         Camera.Visibility = Visibility.Collapsed;
                         Camera5.Visibility = Visibility.Visible;
+                        CameraSoundEffect.Position = TimeSpan.Zero;
+                        CameraSoundEffect.Play();
                         break;
                     case "6":
                         Camera.Visibility = Visibility.Collapsed;
                         Camera6.Visibility = Visibility.Visible;
+                        CameraSoundEffect.Position = TimeSpan.Zero;
+                        CameraSoundEffect.Play();
                         break;
                 }
 
@@ -294,7 +317,10 @@ namespace FNAI
 
             if (isCameraOn)
             {
-                if (CurrentCameraId == 1 && BattalCamPosition == 1) Camera1Battal.Visibility = Visibility.Visible;
+                if (CurrentCameraId == 1 && BattalCamPosition == 1)
+                {
+                    Camera1Battal.Visibility = Visibility.Visible;
+                }
                 if (CurrentCameraId == 2 && BattalCamPosition == 2) Camera2Battal.Visibility = Visibility.Visible;
                 if (CurrentCameraId == 3 && BattalCamPosition == 3) Camera3Battal.Visibility = Visibility.Visible;
                 if (CurrentCameraId == 5 && BattalCamPosition == 5) Camera5Battal.Visibility = Visibility.Visible;
